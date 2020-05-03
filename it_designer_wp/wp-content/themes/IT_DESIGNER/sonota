@@ -1,0 +1,198 @@
+<div class="sidebar_wrap">
+  <div class="search_box_block">
+    <div class="serach_box_title_wrap">
+      <div class="search_box_title_inner">
+        <h2>デザイナー転職</h2>
+        <h3>SEARCH</h3>
+      </div>
+    </div>
+
+    <div class="form_area">
+    <!-- <?php get_search_form(); ?> -->
+    <?php dynamic_sidebar( 'side-widget-search' ); ?>
+    </div>
+
+</div><!-- search_box_block -->
+
+
+<div class="search_box_block">
+  <div class="serach_box_title_wrap">
+    <div class="search_box_title_inner">
+      <h2>デザイナー転職</h2>
+      <h3>CATEGORY</h3>
+    </div>
+  </div>
+
+  <ul>
+  <!-- <?php wp_list_categories( 'title_li=' ); ?> -->
+  <?php dynamic_sidebar( 'side-widget-category' ); ?>
+  </ul>
+
+</div><!-- search_box_block -->
+
+
+<div class="search_box_block">
+  <div class="serach_box_title_wrap">
+    <div class="search_box_title_inner">
+      <h2>デザイナー転職</h2>
+      <h3>ARCHIVE</h3>
+    </div>
+  </div>
+
+  <ul>
+  <!-- <?php wp_get_archives( 'type=postbypost&limit=5' ); ?> -->
+  <?php dynamic_sidebar( 'side-widget-archive' ); ?>
+  </ul>
+
+</div><!-- search_box_block -->
+
+
+
+
+  </div>
+
+  //wiget-category
+  register_sidebar(array(
+      'name'=>'カテゴリーサイドバー',
+      'id' => 'side-widget-category',
+      'description'   => '管理画面に表示するウィジェットを追加します。',
+      'before_widget'=>'<section id="%1$s" class="widget %2$s">',
+      'after_widget'=>'</section>',
+      'before_title' => '<p class="widget-title">',
+      'after_title' => '</p>'
+      ));
+  //wiget-archive
+  register_sidebar(array(
+      'name'=>'アーカイブサイドバー',
+      'id' => 'side-widget-archive',
+      'description'   => '管理画面に表示するウィジェットを追加します。',
+      'before_widget'=>'<section id="%1$s" class="widget %2$s">',
+      'after_widget'=>'</section>',
+      'before_title' => '<p class="widget-title">',
+      'after_title' => '</p>'
+      ));
+
+
+
+
+
+
+      <?php 
+function it_designer_scripts() {
+  //reset.css
+  wp_enqueue_style( 'it_designer_reset', get_template_directory_uri() . '/static/css/reset.css' );
+  //slick.css
+  wp_enqueue_style( 'it_designer_slick', get_template_directory_uri() . '/static/slick/slick.css' );
+  //slick-theme.css
+  wp_enqueue_style( 'it_designer_slick-theme', get_template_directory_uri() . '/static/slick/slick-theme.css' );
+  //style.css
+   wp_enqueue_style( 'it_designer_style', get_template_directory_uri() . '/static/css/style.css' );
+  //wpのjquery停止
+  wp_deregister_script('jquery');
+  wp_enqueue_script( 'jquery','//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js', array(), NULL, true );
+  //js jquery
+  wp_enqueue_script( 'it_designer_jquery', get_theme_file_uri( '/js/jquery-3.3.1.min.js') ); 
+  //slick.min.js
+  wp_enqueue_script( 'it_designer_silck.min', get_theme_file_uri( '/static/slick/slick.min.js') ); 
+  //googlefont
+  wp_enqueue_style( 'google-webfont-style', '//fonts.googleapis.com/css?family=Comfortaa&display=swap');
+  //fontawesome
+  wp_enqueue_style( 'fontawesome', '//use.fontawesome.com/releases/v5.6.1/css/all.css');
+
+}
+add_action( 'wp_enqueue_scripts', 'it_designer_scripts');
+
+
+function it_designer_setup() {
+  //nav
+  register_nav_menu( 'header-nav',  ' ヘッダーナビゲーション ' );
+  register_nav_menu( 'footer-nav',  ' フッターナビゲーション ' );
+  //アイキャッチ画像を使う
+  add_theme_support( 'post-thumbnails' );
+  //アイキャッチ画像のサイズを設定
+  set_post_thumbnail_size(300,300);
+}
+add_action( 'after_setup_theme', 'it_designer_setup' );
+
+
+function widgets_area() {
+  //wiget
+  register_sidebar(array(
+      'name'=>'サイドバー',
+      'id' => 'side-widget',
+      'description'   => '管理画面に表示するウィジェットを追加します。',
+      'before_widget'=>'<section id="%1$s" class="widget %2$s">',
+      'after_widget'=>'</section>',
+      'before_title' => '<p class="widget-title">',
+      'after_title' => '</p>'
+      ));
+}
+add_action( 'widgets_init', 'widgets_area' );
+
+
+function add_favicon() {
+  // ファビコン
+  echo '<link rel="shortcut icon" href=" ' . get_template_directory_uri() . '/static/favicon.ico" type="image/x-icon" />' . "\n";
+}
+add_action('wp_head', 'add_favicon');
+
+
+// add_filter( 'widget_title', 'remove_widget_title_all' );
+// function remove_widget_title_all( $widget_title ) {
+//     return;
+// }
+
+
+add_theme_support('post-thumbnails');
+
+add_action( 'after_setup_theme', 'baw_theme_setup' );
+function baw_theme_setup() {
+ add_image_size('s_thumbnail', 200, 150 ,true );
+ add_image_size( 'm_thumbnail', 240, 180, true );
+ add_image_size('l_thumbnail', 560, 420, true );
+}
+
+
+
+
+
+?>
+
+
+
+
+<?php
+      $paged = (int) get_query_var('paged');
+      $args = array(
+      'category__not_in' => array(71,72,73),
+      'posts_per_page' => -1,
+      'paged' => $paged,
+      'orderby' => 'post_date',
+      'order' => 'DESC',
+      'post_type' => 'post',
+      'post_status' => 'publish'
+      );
+      $the_query = new WP_Query($args);
+      if ( $the_query->have_posts() ) :
+       while ( $the_query->have_posts() ) : $the_query->the_post();
+        get_template_part( 'excerpt' );
+      ?>
+      <?php if( !in_category(array('abc','def')) ) { ?>
+      <?php } ?>
+      <?php endwhile; endif; ?>
+
+
+      <div class="pagenum">
+      <?php
+      if ($the_query->max_num_pages > 1) {
+       echo paginate_links(array(
+       'type' => 'list',
+       'base' => get_pagenum_link(1) . '%_%',
+       'format' => 'page/%#%/',
+       'current' => max(1, $paged),
+       'total' => $the_query->max_num_pages
+       ));
+      }
+      ?>
+      </div>
+      <?php wp_reset_postdata(); ?>
