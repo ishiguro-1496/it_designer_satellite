@@ -4,6 +4,8 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>"/>
     <title>デザイナー転職</title>
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/static/favicon.ico">
+    <meta name="description" content="
+    デザイナーの転職のための記事やしってると便利な情報を提供しています。デザイナーの転職にどうぞ">
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="">
     <meta name="keywords" content="">

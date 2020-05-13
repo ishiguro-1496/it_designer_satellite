@@ -1,62 +1,39 @@
 <?php get_header(); ?>
-<div class="main_content_wrap">
-  <div class="main_content_inner">
-
-
-    <div class="main_content_left">
-      <h2 class="content_title">ARTICLE</h2>
-      <h3 class="content_sub_title">デザイナー転職記事</h3>
-      <div class="column_box_wrap">
+  <div class="main_content_wrap">
+    <div class="main_content_inner">
+      <div class="main_content_left">
       <?php
-      $paged = (int) get_query_var('paged');
-      $args = array(
-        'posts_per_page' => 8,
-        'paged' => $paged,
-        'orderby' => 'post_date',
-        'order' => 'ASC',
-        'post_type' => 'post',
-        'post_status' => 'publish'
-      );
-      $the_query = new WP_Query($args);
-      if ( $the_query->have_posts() ) :
-        while ( $the_query->have_posts() ) : $the_query->the_post();
-          get_template_part( 'excerpt' );
+      while ( have_posts() ) :  
+        the_post();
+        get_template_part( 'content' );
+      endwhile; 
       ?>
-      <?php endwhile; endif; ?>
 
-      <div class="pagenum">
-      <?php
-      if ($the_query->max_num_pages > 1) {
-       echo paginate_links(array(
-       'type' => 'list',
-       'base' => get_pagenum_link(1) . '%_%',
-       'format' => 'page/%#%/',
-       'current' => max(1, $paged),
-       'total' => $the_query->max_num_pages
-       ));
-      }
-      ?>
-      </div>
-       
-      <?php wp_reset_postdata(); ?>
+      <div class="prev_next_btn">
+        <div class="prev_btn">
+        <?php previous_post_link( '%link', '◀︎　PREV', FALSE ); ?>
+        </div>
+        <div class="next_btn">
+        <?php next_post_link( '%link', 'NEXT　▶︎', FALSE );  wp_reset_query();?>
+        </div>
+      </div><!-- prev_next_btn -->
 
-    </div><!-- column_box_wrap -->
-    </div><!---/main_content_left--->
-
-
-    <div class="main_content_right">
+      </div><!---/main_content_left--->
+      <div class="main_content_right">
         <?php get_sidebar('search'); ?>
 
         <?php get_sidebar('category'); ?>
 
         <?php get_sidebar('archive'); ?>
-    </div><!-- main_content_right -->
-  </div><!-- main_content_inner -->
-</div><!-- main_content_wrap -->
+      </div><!-- main_content_right -->
+    </div><!-- main_content_inner -->
+  </div><!-- main_content_wrap -->
+  <?php get_template_part('recommend_article'); ?>
+  <?php get_template_part('related_article'); ?>
 <?php get_footer(); ?>
 
 
-<script type="text/javascript">
+  <script type="text/javascript">
 
 
           //変数定義
@@ -126,6 +103,22 @@
                 var slide_img_W = $(".slide_img").width();
                 var slide_img_H = slide_img_W * 2 / 3;
                 $(".slide_img").css({ "height": slide_img_H });
+
+                var category_detail_img_W = $(".category_detail_img").width();
+                var category_detail_img_H = category_detail_img_W * 2 / 3;
+                $(".category_detail_img").css({ "height": category_detail_img_H });
+
+                var related_article_img_W = $(".related_article_img").width();
+                var related_article_img_H = related_article_img_W * 2 / 3;
+                $(".related_article_img").css({ "height": related_article_img_H });
+
+                var column_main_img_W = $(".column_main_img").width();
+                var column_main_img_H = column_main_img_W * 2 / 3;
+                $(".column_main_img").css({ "height": column_main_img_H });
+
+                var column_detail_img_W = $(".column_detail_img").width();
+                var column_detail_img_H = column_detail_img_W * 2 / 3;
+                $(".column_detail_img").css({ "height": column_detail_img_H });
             }
             $(window).resize(function(){
                 resizeImage();
@@ -142,6 +135,10 @@
               arrows:false,
               dots:true
            });
+
+
+
+
   </script>
 
 </html>
