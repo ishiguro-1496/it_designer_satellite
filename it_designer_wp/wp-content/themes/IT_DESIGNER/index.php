@@ -1,70 +1,45 @@
-<!-- <?php /* Template Name:全記事一覧 */?> -->
 <?php get_header(); ?>
-<div class="main_content_wrap">
-  <div class="main_content_inner">
-    <div class="main_content_left">
-      <h2 class="content_title">ARTICLE</h2>
-      <h3 class="content_sub_title">デザイナー転職記事</h3>
-      <?php
-      $paged = (int) get_query_var('paged');
-      $args = array(
-      'category__not_in' => array(71,72,73),
-      'posts_per_page' => 5,
-      'paged' => $paged,
-      'orderby' => 'post_date',
-      'order' => 'DESC',
-      'post_type' => 'post',
-      'post_status' => 'publish'
-      );
-      $the_query = new WP_Query($args);
-      if ( $the_query->have_posts() ) :
-       while ( $the_query->have_posts() ) : $the_query->the_post();
-      ?>
-      <?php if( !in_category(array('abc','def')) ) { ?>
-      <a href="<?php echo get_permalink(); ?>">
-      <article class="post">
-      <div class="archive_post_img">
-      <?php echo $cat_name; ?>
-      <?php the_post_thumbnail(); ?>
-      </div>
-      <div class="archive_post_content">
-      <?php
-      the_title( sprintf( '<h2 class="entry-title">', esc_url( get_permalink() ) ), '</h2>' );
-      ?>
-      <span class="date"><i class="far fa-calendar-check"></i> <?php the_time('Y/m/d'); ?></span>
-      <?php the_excerpt(); ?>
-      </div>
-      </article><!-- #post-${ID} -->
-      </a>
-      <?php } ?>
-      <?php endwhile; endif; ?>
+    <div class="main_content_wrap">
+      <div class="main_content_inner">
+        <div class="main_content_left">
+          <?php get_template_part('about'); ?>
+          <h2 class="content_title">NEW ARTICLE</h2>
+          <h3 class="content_sub_title">新着デザイナー転職記事</h3>
+          <div class="column_box_wrap">
+            <?php if ( have_posts() ) : ?>
+            <?php
+            while ( have_posts() ) : 
+              the_post();
+              get_template_part( 'excerpt' );
+            endwhile;
+            else :
+            echo '記事はありません。';
+            endif;
+            ?>
+          </div><!-- column_box_wrap -->
+          <div class="btn_area">
+            <a class="more_btn" href="">
+              デザイナー転職記事をもっと見る
+              <img src="<?php echo get_template_directory_uri() ?>/static/images/arrow_right.svg" alt="デザイナー転職記事をもっと見る">
+            </a>
+          </div>
+        </div><!---/main_content_left--->
 
-      <div class="pagenum">
-      <?php
-      if ($the_query->max_num_pages > 1) {
-       echo paginate_links(array(
-       'type' => 'list',
-       'base' => get_pagenum_link(1) . '%_%',
-       'format' => 'page/%#%/',
-       'current' => max(1, $paged),
-       'total' => $the_query->max_num_pages
-       ));
-      }
-      ?>
-      </div>
-      <?php wp_reset_postdata(); ?>
-    </div><!---/main_content_left--->
-    <div class="main_content_right">
-        <?php get_sidebar(); ?>
-    </div><!-- main_content_right -->
-  </div><!-- main_content_inner -->
-</div><!-- main_content_wrap -->
+        <div class="main_content_right">
+          <?php get_sidebar('search'); ?>
+
+          <?php get_sidebar('category'); ?>
+
+          <?php get_sidebar('archive'); ?>
+        </div><!-- main_content_right -->
+        
+      </div><!-- main_content_inner -->
+    </div><!-- main_content_wrap -->
+  <?php get_template_part('external_link'); ?>
 <?php get_footer(); ?>
 
 
-<script type="text/javascript">
-
-
+  <script type="text/javascript">
           //変数定義
           var navigationOpenFlag = false;
           var navButtonFlag = true;

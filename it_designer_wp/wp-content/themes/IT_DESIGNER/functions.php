@@ -83,10 +83,4 @@ function my_posy_search($search) {
   return $search;
 }
 add_filter('posts_search', 'my_posy_search');
-
-
-
-
-
-
 ?>

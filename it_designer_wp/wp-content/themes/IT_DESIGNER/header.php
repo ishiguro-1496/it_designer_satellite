@@ -1,15 +1,11 @@
 <!DOCTYPE HTML>
-<html <?php language_attributes(); ?>>
+<html>
   <head>
-    <meta charset="<?php bloginfo( 'charset' ); ?>"/>
-    <title>デザイナー転職</title>
-    <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/static/favicon.ico">
-    <meta name="description" content="
-    デザイナーの転職のための記事やしってると便利な情報を提供しています。デザイナーの転職にどうぞ">
+    <meta charset="utf-8"/>
+    <title>ミッフィー好きのデザイナー転職</title>
+    <meta name="keywords" content="デザイナー 転職 未経験 サイト 自己pr 求人 ポートフォリオ web 参考 サービス 年収"/>
     <meta name="viewport" content="width=device-width">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
+    <link rel="shortcut icon" type="image/x-icon" href="<?php echo get_template_directory_uri(); ?>/static/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Comfortaa&display=swap" rel="stylesheet">
     <link href="<?php echo get_template_directory_uri(); ?>/static/css/reset.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo get_template_directory_uri(); ?>/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
@@ -29,7 +25,7 @@
       })(document);
     </script>
     
-  <?php wp_head(); ?>
+    <?php wp_head(); ?>
   </head>
   <body <?php body_class(); ?>>
   <?php wp_body_open(); ?>

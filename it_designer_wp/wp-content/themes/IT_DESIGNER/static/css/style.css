@@ -1138,8 +1138,31 @@ footer{
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-.prev_next_btn{
+.prev_next_btn {
+  display: flex;
+  justify-content: center;
+}
+.next_btn {
+  margin-right: 10px;
+  /*border: 1px solid #8678C5;*/
+}
+.next_btn a {
+  display: block;
+  padding: 15px 30px 15px;
+  color: #8678C5; 
+  border: 1px solid #8678C5;
+}
+.prev_btn {
+  margin-left: 10px;
+  /*border: 1px solid #8678C5;*/
+}
+.prev_btn a {
+  display: block;
+  padding: 15px 30px 15px;
+  color: #8678C5;
+  border: 1px solid #8678C5;
+}
+/*.prev_next_btn{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1149,9 +1172,9 @@ footer{
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-}
+}*/
 
-.prev_btn a{
+/*.prev_btn a{
   display: inline-block;
   margin: 0 20px;
   font-size: 15px;
@@ -1161,20 +1184,9 @@ footer{
   padding: 15px 50px;
   border: 1px solid #8678C5;
   background-color: #fff;
-}
-
-/*.prev_btn img{
-  position: absolute;
-  left: -20px;
-  top: 50%;
-  width: 50px;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
 }*/
 
-.next_btn{
+/*.next_btn{
   display: inline-block;
   margin: 0 20px;
   font-size: 15px;
@@ -1184,31 +1196,23 @@ footer{
   padding: 15px 50px;
   border: 1px solid #8678C5;
   background-color: #fff;
+}*/
+
+ /*.next_btn a{
+  display: inline-block;
+  margin: 0 20px;
+  font-size: 15px;
+  font-weight: normal;
+  color: #8678C5;
+  position: relative;
+  padding: 15px 50px;
+  border: 1px solid #8678C5;
+  background-color: #fff;
+}*/
+/* search.php*/
+.screen-reader-text {
+  display: none;
 }
-
-/*.next_btn img{
-  position: absolute;
-  right: -20px;
-  top: 50%;
-  width: 50px;
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-  -webkit-transition: all 0.3s ease;
-  transition: all 0.3s ease;
-}*/
-
-/*.prev_btn:hover img {
-  left: -45px;
-}*/
-
-/*.next_btn:hover img {
-  right: -45px;
-}*/
-
-
-
-
-
 @media screen and (max-width: 1100px){
 
   .main_content_wrap{
